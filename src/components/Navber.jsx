@@ -12,25 +12,25 @@ const Navber = () => {
   };
   return (
     <div className="fixed z-10 bg-opacity-30 bg-[#151515] w-full h-24 flex items-center justify-between px-5">
-      <div>
+      <div className="font-cinzel">
         <h3 className="text-white text-3xl"> BISTRO BOSS</h3>
         <p className="text-white text-2xl">Restaurant </p>
       </div>
       <div className="hidden lg:block">
-        <ul className="flex items-center gap-4">
-          <li className="text-white uppercase">
+        <ul className="flex items-center gap-4 font-inter ">
+          <li className="text-white uppercase hover:text-[#EEFF25]">
             <Link>Home </Link>
           </li>
-          <li className="text-white uppercase">
+          <li className="text-white uppercase hover:text-[#EEFF25]">
             <Link> CONTACT us</Link>
           </li>
-          <li className="text-white uppercase">
+          <li className="text-white uppercase hover:text-[#EEFF25]">
             <Link>DASHBOARD </Link>
           </li>
-          <li className="text-white uppercase">
+          <li className="text-white uppercase hover:text-[#EEFF25]">
             <Link>Our Menu</Link>
           </li>
-          <li className="text-white uppercase">
+          <li className="text-white uppercase hover:text-[#EEFF25]">
             <Link>Our Shop</Link>
           </li>
           <li>
@@ -64,20 +64,20 @@ const Navber = () => {
         >
           <MdClose />
         </div>
-        <ul className="mt-20 ml-5 flex flex-col gap-4">
-          <li className="text-white uppercase">
+        <ul className="mt-20 ml-5 flex flex-col gap-4 font-inter ">
+          <li className="text-white uppercase hover:text-[#EEFF25]">
             <Link>Home </Link>
           </li>
-          <li className="text-white uppercase">
+          <li className="text-white uppercase hover:text-[#EEFF25]">
             <Link> CONTACT us</Link>
           </li>
-          <li className="text-white uppercase">
+          <li className="text-white uppercase hover:text-[#EEFF25]">
             <Link>DASHBOARD </Link>
           </li>
-          <li className="text-white uppercase">
+          <li className="text-white uppercase hover:text-[#EEFF25]">
             <Link>Our Menu</Link>
           </li>
-          <li className="text-white uppercase">
+          <li className="text-white uppercase hover:text-[#EEFF25]">
             <Link>Our Shop</Link>
           </li>
           <li>
