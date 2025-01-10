@@ -1,15 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import cartImg from "../assets/icon/151-1511569_cart-notifications-free-shopping-cart-favicon-hd-png-removebg-preview.png";
 import profile from "../assets/image.png";
-import { RxHamburgerMenu } from "react-icons/rx";
+import { RxButton, RxHamburgerMenu } from "react-icons/rx";
 import { MdClose } from "react-icons/md";
+import { AuthContext } from "../providers/AuthProvider";
+import useCart from "../hooks/useCart";
 
 const Navber = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
   const [open, setOpen] = useState(false);
   const handleNav = () => {
     setOpen(!open);
   };
+
+  console.log(user?.photoURL);
+  const handleLogout = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
+
+  console.log("Hello User", user);
   return (
     <div className="fixed z-10 bg-opacity-30 bg-[#151515] w-full h-24 flex items-center justify-between px-5">
       <div className="font-cinzel">
@@ -28,24 +41,46 @@ const Navber = () => {
             <Link>DASHBOARD </Link>
           </li>
           <li className="text-white uppercase hover:text-[#EEFF25]">
-            <Link>Our Menu</Link>
+            <Link to="/menu">Our Menu</Link>
           </li>
           <li className="text-white uppercase hover:text-[#EEFF25]">
-            <Link>Our Shop</Link>
+            <Link to="/order/salad">Our Shop</Link>
           </li>
-          <li>
-            <Link>
-              <img className="w-12" src={cartImg} alt="" />
+          <li className="relative">
+            <Link to="/dashboard/cart">
+              <img className="w-12 " src={cartImg} alt="" />
+              <span className="bg-[#f02e2e] text-sm text-white rounded-full  px-2 absolute top-5 left-6">
+                {cart.length}
+              </span>
             </Link>
           </li>
-          <li className="text-white uppercase">
-            <Link>SIGN OUT </Link>
-          </li>
-          <li>
-            <Link>
-              <img className="w-11" src={profile} alt="" />
-            </Link>
-          </li>
+          {user ? (
+            <li className="text-white capitalize ">
+              <button onClick={logOut}>LOGOUT </button>
+            </li>
+          ) : (
+            <li className="text-white uppercase">
+              <Link to="/login">Login </Link>
+            </li>
+          )}
+
+          {user ? (
+            <li>
+              <Link>
+                <img
+                  className="w-12 h-12 rounded-full border-2 border-yellow-500"
+                  src={user?.photoURL}
+                  alt=""
+                />
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link>
+                <img className="w-11" src={profile} alt="" />
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
       <div onClick={handleNav} className="lg:hidden cursor-pointer">
@@ -75,24 +110,45 @@ const Navber = () => {
             <Link>DASHBOARD </Link>
           </li>
           <li className="text-white uppercase hover:text-[#EEFF25]">
-            <Link>Our Menu</Link>
+            <Link to="/menu">Our Menu</Link>
           </li>
           <li className="text-white uppercase hover:text-[#EEFF25]">
-            <Link>Our Shop</Link>
+            <Link to="/order/salad">Our Shop</Link>
           </li>
           <li>
-            <Link>
+            <Link className="relative">
               <img className="w-12" src={cartImg} alt="" />
+              <span className="bg-[#f02e2e] text-white rounded-full px-2 absolute top-4 left-7">
+                {cart.length}
+              </span>
             </Link>
           </li>
-          <li className="text-white uppercase">
-            <Link>SIGN OUT </Link>
-          </li>
-          <li>
-            <Link>
-              <img className="w-11" src={profile} alt="" />
-            </Link>
-          </li>
+          {user ? (
+            <li className="text-white capitalize ">
+              <button onClick={logOut}>LOGOUT </button>
+            </li>
+          ) : (
+            <li className="text-white uppercase">
+              <Link to="/login">Login </Link>
+            </li>
+          )}
+          {user ? (
+            <li>
+              <Link>
+                <img
+                  className="w-12 rounded-full border-2 border-yellow-500"
+                  src={user?.photoURL}
+                  alt=""
+                />
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link>
+                <img className="w-11" src={profile} alt="" />
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </div>
