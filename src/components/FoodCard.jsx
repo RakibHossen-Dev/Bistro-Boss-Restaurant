@@ -65,14 +65,14 @@ const FoodCard = ({ item }) => {
   };
   return (
     <div className="md:h-[450px] bg-[#F3F3F3] relative flex flex-col">
-      <img className="w-full" src={image} alt={name} />
+      <img className="w-full h-[290px]" src={image} alt={name} />
       <p className="bg-[#BB8506] text-center absolute right-2 top-2 text-white py-1 px-4">
         ${price}
       </p>
       <div className="p-3 flex flex-col flex-grow justify-between">
         <div className="text-center space-y-4">
           <h3 className="text-2xl font-bold">{name}</h3>
-          <p className="text-start lg:pb-0 pb-5">{recipe}</p>
+          <p className="text-start lg:pb-0 pb-5">{recipe.slice(0, 70)}...</p>
         </div>
         <button
           onClick={handleAddToCart}

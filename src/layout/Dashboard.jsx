@@ -16,7 +16,7 @@ const Dashboard = () => {
   // TODO :get isAdmin value from the database
   const [isAdmin] = useAdmin();
   return (
-    <div className="flex ">
+    <div className="md:flex ">
       <div className="w-64 min-h-screen bg-[#D1A054] font-cinzel ">
         <div className="font-cinzel ml-5  my-8">
           <h3 className=" text-3xl"> BISTRO BOSS</h3>
@@ -118,7 +118,7 @@ const Dashboard = () => {
           </li>
         </ul>
       </div>
-      <div className="flex-1 ">
+      <div className="flex-1 bg-gray-100 ">
         <Outlet></Outlet>
       </div>
     </div>

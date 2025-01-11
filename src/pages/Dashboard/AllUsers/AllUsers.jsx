@@ -59,7 +59,7 @@ const AllUsers = () => {
   };
 
   return (
-    <div className="mt-5">
+    <div className="m-5">
       <SectionTitle
         subHeading={"How many??"}
         heading={"MANAGE ALL USERS"}
