@@ -4,6 +4,7 @@ import useMenu from "../../../hooks/useMenu";
 import { FiEdit } from "react-icons/fi";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const ManageItems = () => {
   const [menu, refetch] = useMenu();
@@ -33,7 +34,6 @@ const ManageItems = () => {
       }
     });
   };
-  const handleUpdateItem = (item) => {};
   return (
     <div className="m-5">
       <SectionTitle
@@ -83,8 +83,10 @@ const ManageItems = () => {
                 <td>{item.name}</td>
                 <td>${item.price}</td>
                 <th>
-                  <button onClick={() => handleUpdateItem(item)}>
-                    <FiEdit className="text-4xl cursor-pointer p-2 rounded-lg bg-[#D1A054] text-white" />
+                  <button>
+                    <Link to={`/dashboard/updateItem/${item._id}`}>
+                      <FiEdit className="text-4xl cursor-pointer p-2 rounded-lg bg-[#D1A054] text-white" />
+                    </Link>
                   </button>
                 </th>
                 <th>

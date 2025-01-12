@@ -1,16 +1,26 @@
-import { useForm } from "react-hook-form";
-import SectionTitle from "../../../components/SectionTitle";
+import React from "react";
 import { FaUtensils } from "react-icons/fa";
+import SectionTitle from "../../../components/SectionTitle";
+import { useLoaderData } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import Swal from "sweetalert2";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-const AddItems = () => {
+const UpdateItem = () => {
+  const { name, recipe, image, category, price, _id } = useLoaderData();
   const { register, handleSubmit, reset } = useForm();
   const axiosPublic = useAxiosPublic();
+
   const axiosSecure = useAxiosSecure();
+  const item = useLoaderData();
+  console.log(item);
+  //   const { name, category, recipe, price, image } = item;
+
+  //   console.log("Tis is upadate item", item);
+
   const onSubmit = async (data) => {
     console.log(data);
     const imageFile = { image: data.image[0] };
@@ -27,9 +37,9 @@ const AddItems = () => {
         recipe: data.recipe,
         image: res.data.data.display_url,
       };
-      const menuRes = await axiosSecure.post("/menu", menuItem);
+      const menuRes = await axiosSecure.patch(`/menu/${_id}`, menuItem);
       console.log(menuRes.data);
-      if (menuRes.data.insertedId) {
+      if (menuRes.data.modifiedCount) {
         reset();
         Swal.fire({
           position: "top-end",
@@ -46,11 +56,10 @@ const AddItems = () => {
   return (
     <div className="m-5">
       <SectionTitle
-        subHeading={"What's new?"}
-        heading={"ADD AN ITEM "}
+        subHeading={"Hurry Up!"}
+        heading={"UPDATE ITEM"}
       ></SectionTitle>
-
-      <div className="max-w-[992px] bg-white p-3 md:p-6 mx-auto ">
+      <div className="max-w-[992px] bg-gray-200 p-3 md:p-6 mx-auto ">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="form-control">
             <label className="label">
@@ -58,6 +67,7 @@ const AddItems = () => {
             </label>
             <input
               type="text"
+              defaultValue={name}
               {...register("name", { required: true })}
               placeholder="Recipe name"
               className="input input-bordered rounded-none"
@@ -72,6 +82,7 @@ const AddItems = () => {
 
               <select
                 {...register("category")}
+                defaultValue={category}
                 className="select select-bordered rounded-none w-full "
               >
                 <option disabled value="default">
@@ -90,6 +101,7 @@ const AddItems = () => {
               </label>
               <input
                 type="text"
+                defaultValue={price}
                 {...register("price", { required: true })}
                 placeholder="Price"
                 className="input input-bordered rounded-none"
@@ -103,6 +115,7 @@ const AddItems = () => {
             </label>
             <textarea
               {...register("recipe")}
+              defaultValue={recipe}
               className="textarea textarea-bordered rounded-none w-full"
               placeholder="Recipe Details"
               rows="6"
@@ -112,30 +125,20 @@ const AddItems = () => {
             <input
               {...register("image", { required: true })}
               type="file"
+              //   defaultValue={image}
               className="file-input rounded-none mb-3 "
             />
           </div>
-          {/* <input
-            className="py-2 px-6 text-white bg-[#835D23]"
-            type="submit"
-            value="Add Item"
-          /> */}
-          <button className="py-2 px-4 flex items-center gap-2 text-white bg-[#835D23]">
-            Add Item <FaUtensils></FaUtensils>
-          </button>
-          {/* <label>First Name</label>
-          <input {...register("firstName")} />
-          <label>Gender Selection</label>
-          <select {...register("gender")}>
-            <option value="female">female</option>
-            <option value="male">male</option>
-            <option value="other">other</option>
-          </select>
-          */}
+
+          <div className="flex justify-center items-center">
+            <button className="py-2 px-4 flex items-center gap-2 text-white bg-[#835D23]">
+              Update Recipe Details <FaUtensils></FaUtensils>
+            </button>
+          </div>
         </form>
       </div>
     </div>
   );
 };
 
-export default AddItems;
+export default UpdateItem;
