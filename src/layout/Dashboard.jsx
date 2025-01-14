@@ -7,7 +7,7 @@ import { TiHome } from "react-icons/ti";
 import { IoMenu } from "react-icons/io5";
 import { FaShoppingBag } from "react-icons/fa";
 import useCart from "../hooks/useCart";
-import { IoIosPeople } from "react-icons/io";
+import { IoIosPeople, IoIosWallet } from "react-icons/io";
 import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
@@ -22,7 +22,7 @@ const Dashboard = () => {
           <h3 className=" text-3xl"> BISTRO BOSS</h3>
           <p className=" text-2xl">Restaurant </p>
         </div>
-        <ul className="menu space-y-3 font-semibold">
+        <ul className="menu space-y-3 font-semibold bg-[#D1A054]">
           {isAdmin ? (
             <>
               <li>
@@ -74,6 +74,12 @@ const Dashboard = () => {
                 <NavLink to="/dashboard/cart">
                   <FaCartShopping className="text-white text-xl"></FaCartShopping>
                   My Cart
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/paymentHistory">
+                  <IoIosWallet className="text-white text-xl"></IoIosWallet>
+                  Payment History
                 </NavLink>
               </li>
               <li>

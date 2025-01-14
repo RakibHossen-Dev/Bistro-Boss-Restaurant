@@ -6,9 +6,11 @@ import { RxButton, RxHamburgerMenu } from "react-icons/rx";
 import { MdClose } from "react-icons/md";
 import { AuthContext } from "../providers/AuthProvider";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 const Navber = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
   const [cart] = useCart();
   const [open, setOpen] = useState(false);
   const handleNav = () => {
@@ -37,9 +39,18 @@ const Navber = () => {
           <li className="text-white uppercase hover:text-[#EEFF25]">
             <Link> CONTACT us</Link>
           </li>
-          <li className="text-white uppercase hover:text-[#EEFF25]">
-            <Link>DASHBOARD </Link>
-          </li>
+
+          {user && isAdmin && (
+            <li className="text-white uppercase hover:text-[#EEFF25]">
+              <Link to="/dashboard/adminHome">DASHBOARD </Link>
+            </li>
+          )}
+          {user && !isAdmin && (
+            <li className="text-white uppercase hover:text-[#EEFF25]">
+              <Link to="/dashboard/userHome">DASHBOARD </Link>
+            </li>
+          )}
+
           <li className="text-white uppercase hover:text-[#EEFF25]">
             <Link to="/menu">Our Menu</Link>
           </li>
@@ -106,9 +117,16 @@ const Navber = () => {
           <li className="text-white uppercase hover:text-[#EEFF25]">
             <Link> CONTACT us</Link>
           </li>
-          <li className="text-white uppercase hover:text-[#EEFF25]">
-            <Link>DASHBOARD </Link>
-          </li>
+          {user && isAdmin && (
+            <li className="text-white uppercase hover:text-[#EEFF25]">
+              <Link to="/dashboard/adminHome">DASHBOARD </Link>
+            </li>
+          )}
+          {user && !isAdmin && (
+            <li className="text-white uppercase hover:text-[#EEFF25]">
+              <Link to="/dashboard/userHome">DASHBOARD </Link>
+            </li>
+          )}
           <li className="text-white uppercase hover:text-[#EEFF25]">
             <Link to="/menu">Our Menu</Link>
           </li>

@@ -4,6 +4,7 @@ import SectionTitle from "../../../components/SectionTitle";
 import { AiOutlineDelete } from "react-icons/ai";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const axiosSecure = useAxiosSecure();
@@ -50,9 +51,18 @@ const Cart = () => {
             Total orders: {cart.length}
           </h2>
           <h2 className="text-3xl font-semibold">total price: ${totalPrice}</h2>
-          <button className="px-4 py-2 rounded-md text-white bg-[#D1A054]">
-            Pay{" "}
-          </button>
+          {cart.length ? (
+            <button className="px-4 py-2 rounded-md text-white bg-[#D1A054]">
+              <Link to="/dashboard/payment">Pay</Link>
+            </button>
+          ) : (
+            <button
+              disabled
+              className="px-4 py-2 rounded-md text-white bg-[#D1A054]"
+            >
+              Pay
+            </button>
+          )}
         </div>
       </div>
       <div className="overflow-x-auto rounded-md p-5 bg-white">
